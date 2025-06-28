@@ -7,5 +7,6 @@ class UnidadesFrame(tb.Frame):
         super().__init__(parent, *args, **kwargs)
         self.config(style='MainPanel.TFrame')
 
-        # Aquí puedes agregar el nuevo contenido del formulario de las unidades
-        pass
+        # Título del formulario
+        titulo = tk.Label(self, text="Formulario de las Unidades", font=("Segoe UI", 18, "bold"), anchor="center")
+        titulo.pack(pady=(20, 10))
