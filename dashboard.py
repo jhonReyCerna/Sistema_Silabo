@@ -240,7 +240,7 @@ def main():
         unidades_frame = UnidadesFrame(inferior_frame)
         unidades_frame.pack(fill='both', expand=True, padx=0, pady=0)
         for idx, btn in enumerate(botones_superior_refs):
-            if idx == 1:
+            if idx == 0 or idx == 1:
                 btn.config(style='GeneralSelected.TButton')
             else:
                 btn.config(style=botones_superior[idx][1])
