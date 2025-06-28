@@ -226,9 +226,21 @@ def main():
         for widget in inferior_frame.winfo_children():
             widget.destroy()
         formulario_general = FormularioGeneral(inferior_frame)
-        formulario_general.pack(fill='both', expand=True, padx=40, pady=40)
+        formulario_general.pack(fill='both', expand=True, padx=0, pady=0)
         for idx, btn in enumerate(botones_superior_refs):
             if idx == 0:
+                btn.config(style='GeneralSelected.TButton')
+            else:
+                btn.config(style=botones_superior[idx][1])
+
+    from unidades import UnidadesFrame
+    def mostrar_unidades():
+        for widget in inferior_frame.winfo_children():
+            widget.destroy()
+        unidades_frame = UnidadesFrame(inferior_frame)
+        unidades_frame.pack(fill='both', expand=True, padx=0, pady=0)
+        for idx, btn in enumerate(botones_superior_refs):
+            if idx == 1:
                 btn.config(style='GeneralSelected.TButton')
             else:
                 btn.config(style=botones_superior[idx][1])
@@ -236,6 +248,8 @@ def main():
     for key in keys_ordenados:
         if key == 'formulario':
             btn_command = mostrar_formulario_general
+        elif key == 'unidades':
+            btn_command = mostrar_unidades
         else:
             btn_command = lambda: None
         btn = tb.Button(
