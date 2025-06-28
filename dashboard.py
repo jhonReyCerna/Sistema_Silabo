@@ -46,7 +46,7 @@ def main():
     style.configure('Header.TFrame', background="#1976D2")
     style.configure('Header.TLabel', background="#1976D2", foreground="white", font=("Segoe UI Emoji", 34, "bold"))
     style.configure('Sidebar.TFrame', background="#ffffff")
-    style.configure('MainPanel.TFrame', background="#f3f5f7")
+    style.configure('MainPanel.TFrame', background="#ffffff")
     style.configure('Footer.TLabel', background="#E3E7EB", foreground="#1976D2", font=("Segoe UI", 12, "italic"))
     style.configure('Superior.TFrame', background='#FFFFFF')
 
@@ -250,7 +250,9 @@ def main():
                 btn.config(text=f"{iconos[key]} {nombres[key]}", width=30, padding=(20, 12))
             nav_label.config(text='Navegación')
             hamburger_icon_btn.grid_remove()
-            nav_frame.pack(fill='x', pady=(10, 0))
+            # Empaqueta nav_frame antes de botones_frame para que siempre quede arriba
+            nav_frame.pack_forget()
+            nav_frame.pack(before=botones_frame, fill='x', pady=(10, 0))
             sidebar_expanded['value'] = True
         sidebar.pack_propagate(False)
 
