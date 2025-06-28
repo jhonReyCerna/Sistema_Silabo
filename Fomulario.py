@@ -7,8 +7,6 @@ class FormularioGeneral(tb.Frame):
         super().__init__(parent, *args, **kwargs)
         self.config(style='MainPanel.TFrame')
 
-
-        # Agrupar los campos en pares para dos columnas
         field_pairs = [
             [("Código", "codigo_entry"), ("Versión", "version_entry")],
             [("Fecha", "fecha_entry"), ("Maestría", "rama_entry")],
@@ -21,14 +19,12 @@ class FormularioGeneral(tb.Frame):
             [("Seleccionar Horario", "horario_entry"), ("Modalidad", "modalidad_entry")],
         ]
 
-        # Crear un frame interno para centrar el contenido
         content = tb.Frame(self, style='MainPanel.TFrame')
         content.pack(expand=True, fill='both')
 
         entries = {}
         for row, pair in enumerate(field_pairs):
             for col, (label_text, var_name) in enumerate(pair):
-                # Mucho mayor separación entre columnas
                 label = tk.Label(content, text=label_text, anchor="w", font=("Segoe UI", 13, "bold"))
                 label.grid(row=row, column=col*2, padx=(60 if col == 1 else 10, 10), pady=12, sticky="w")
                 if var_name == "version_entry":
@@ -36,7 +32,7 @@ class FormularioGeneral(tb.Frame):
                 elif var_name in ["horas_teoria_entry", "horas_practica_entry", "sesiones_entry", "semanas_entry"]:
                     entry = tk.Spinbox(content, from_=0, to=99, width=28, font=("Segoe UI", 12), bg='#f3f5f7')
                 elif var_name == "fecha_entry":
-                    entry = tk.Entry(content, width=32, font=("Segoe UI", 12), bg='#f3f5f7')  # Simula DateEntry
+                    entry = tk.Entry(content, width=32, font=("Segoe UI", 12), bg='#f3f5f7') 
                 elif var_name == "semestre_combobox":
                     entry = ttk.Combobox(content, width=30, font=("Segoe UI", 12), state="readonly", values=["A", "B", "C", "D"])
                     entry.current(0)

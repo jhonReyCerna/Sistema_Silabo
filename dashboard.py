@@ -203,10 +203,8 @@ def main():
         'sesiones': 'Sesiones.TButton',
         'referencias': 'Referencias.TButton'
     }
-    # Función para mostrar el formulario en el panel principal
     def mostrar_formulario_general():
         nonlocal formulario_general
-        # Elimina widgets previos en inferior_frame
         for widget in inferior_frame.winfo_children():
             widget.destroy()
         formulario_general = FormularioGeneral(inferior_frame)
@@ -250,7 +248,7 @@ def main():
                 btn.config(text=f"{iconos[key]} {nombres[key]}", width=30, padding=(20, 12))
             nav_label.config(text='Navegación')
             hamburger_icon_btn.grid_remove()
-            # Empaqueta nav_frame antes de botones_frame para que siempre quede arriba
+            
             nav_frame.pack_forget()
             nav_frame.pack(before=botones_frame, fill='x', pady=(10, 0))
             sidebar_expanded['value'] = True
@@ -258,10 +256,6 @@ def main():
 
     hamburger_icon_btn.config(command=toggle_sidebar)
     hamburger_btn.config(command=toggle_sidebar)
-
-    # Elimina el frame de imagen inicial, ya que ahora se usará inferior_frame para el contenido dinámico
-    # imagen_frame = tb.Frame(main_panel, style='MainPanel.TFrame')
-    # imagen_frame.pack(fill='both', expand=True, padx=(40, 40), pady=(40, 40))
 
     footer = tb.Frame(root, style='Sidebar.TFrame', height=40)
     footer.pack(fill='x', side='bottom')
