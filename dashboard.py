@@ -80,6 +80,27 @@ def main():
             background=[('active', pro_btn_bg_active), ('pressed', pro_btn_bg_pressed)]
         )
 
+    style.configure(
+        'GeneralSelected.TButton',
+        font=("Segoe UI", 13, "bold"),
+        foreground="#ffffff",
+        background="#1976D2",
+        borderwidth=0,
+        relief="flat",
+        padding=(20, 12),
+        bordercolor="#CFD8DC",
+        focusthickness=3,
+        focuscolor="#B0C5B5",
+        lightcolor="#1976D2",
+        darkcolor="#1976D2",
+        anchor="center"
+    )
+    style.map(
+        'GeneralSelected.TButton',
+        foreground=[('active', '#ffffff'), ('pressed', '#1976D2')],
+        background=[('active', '#1976D2'), ('pressed', '#1976D2')]
+    )
+
     style.configure('Hamburger.TButton', background='#ffffff', foreground='#191919', font=("Segoe UI", 26, "bold"), borderwidth=0, relief="flat", padding=(12, 10))
     style.map('Hamburger.TButton', background=[('active', '#e3e7eb')], foreground=[('active', '#191919')])
 
@@ -105,16 +126,12 @@ def main():
     main_panel = tb.Frame(main_content, style='MainPanel.TFrame')
     main_panel.pack(side='right', fill='both', expand=True, padx=(0, 0), pady=(0, 0))
 
-    # Divide main_panel en dos mitades horizontales
     superior_frame = tb.Frame(main_panel, style='Superior.TFrame', height=120)
     superior_frame.pack(fill='x', side='top')
     inferior_frame = tb.Frame(main_panel, style='MainPanel.TFrame')
     inferior_frame.pack(fill='both', expand=True, side='bottom')
-
-    # Contenedor para el formulario (se usará para mostrar/ocultar)
     formulario_general = None
 
-    # Agregar 6 botones horizontales en superior_frame
     botones_superior = [
         ("General", 'General.TButton'),
         ("Unidades", 'Unidades.TButton'),
@@ -125,6 +142,7 @@ def main():
     ]
     botones_frame_superior = tb.Frame(superior_frame, style='Superior.TFrame')
     botones_frame_superior.pack(side='top', fill='x', padx=20, pady=10)
+    botones_superior_refs = []
     for i, (nombre, estilo) in enumerate(botones_superior):
         btn = tb.Button(
             botones_frame_superior,
@@ -134,7 +152,7 @@ def main():
             padding=(10, 8)
         )
         btn.pack(side='left', padx=8, pady=4)
-        # Agregar flecha a la derecha entre botones, excepto el último
+        botones_superior_refs.append(btn)
         if i < len(botones_superior) - 1:
             flecha = tk.Label(
                 botones_frame_superior,
@@ -209,6 +227,11 @@ def main():
             widget.destroy()
         formulario_general = FormularioGeneral(inferior_frame)
         formulario_general.pack(fill='both', expand=True, padx=40, pady=40)
+        for idx, btn in enumerate(botones_superior_refs):
+            if idx == 0:
+                btn.config(style='GeneralSelected.TButton')
+            else:
+                btn.config(style=botones_superior[idx][1])
 
     for key in keys_ordenados:
         if key == 'formulario':
